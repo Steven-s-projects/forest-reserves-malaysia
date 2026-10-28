@@ -1,0 +1,2 @@
+# Preserve input bytes so the recorded source-data hashes remain reproducible.
+data/** -text
