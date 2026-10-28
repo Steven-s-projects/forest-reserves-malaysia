@@ -54,6 +54,6 @@ Two supplied analyses are retained but excluded from the page: the external nati
 
 ## Sources and credit
 
-The portfolio revision addresses chart design, layout, story and data-expression issues
+Original visualisation: Guo Weiyi. The portfolio revision addresses chart design, layout, story and data-expression issues; it has not received a new academic grade.
 
 Reserve data: [national](https://data.gov.my/data-catalogue/forest_reserve) and [state](https://data.gov.my/data-catalogue/forest_reserve_state) series, Forestry Department / DOSM, CC BY 4.0. Other original source links and limitations are listed on the page and in `docs/methodology.md`. Confirm third-party data and map licences before public redistribution.
