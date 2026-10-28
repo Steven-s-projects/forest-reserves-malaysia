@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "national_2021_ha": 12387796.0,
+  "net_change_ha": -708401.0,
+  "net_change_percent": -5.409211544389566,
+  "sabah_sarawak_share_percent": 60.86109264311423,
+  "states_with_reserve_data": 14,
+  "flood_state_year_rows": 88,
+  "districts": 26,
+  "chart_specs": 10,
+  "original_data_hashes_unchanged": 10
+}

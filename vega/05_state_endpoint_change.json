@@ -1,0 +1,165 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 390,
+  "data": {
+    "url": "data/derived/endpoint_change.json"
+  },
+  "config": {
+    "background": "transparent",
+    "view": {
+      "stroke": null
+    },
+    "font": "Arial",
+    "axis": {
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "titleFontWeight": 500,
+      "labelColor": "#53645b",
+      "titleColor": "#20372e",
+      "gridColor": "#e7ece6",
+      "domain": false,
+      "tickColor": "#cdd7cf",
+      "labelPadding": 7,
+      "titlePadding": 12
+    },
+    "legend": {
+      "labelFontSize": 11,
+      "titleFontSize": 11,
+      "orient": "bottom",
+      "labelColor": "#53645b",
+      "titleColor": "#20372e",
+      "symbolStrokeWidth": 1
+    }
+  },
+  "params": [
+    {
+      "name": "stateFocus",
+      "value": "All states"
+    },
+    {
+      "name": "changeMetric",
+      "value": "Percent",
+      "bind": {
+        "input": "select",
+        "options": [
+          "Percent",
+          "Hectares"
+        ],
+        "name": "Compare change in: "
+      }
+    }
+  ],
+  "transform": [
+    {
+      "calculate": "changeMetric === 'Percent' ? datum.change_percent : datum.change_area",
+      "as": "change"
+    },
+    {
+      "calculate": "datum.change_area >= 0 ? 'Increase' : 'Decrease'",
+      "as": "direction"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "color": "#9eaaa0"
+      },
+      "encoding": {
+        "x": {
+          "datum": 0,
+          "axis": {
+            "title": {
+              "expr": "changeMetric === 'Percent' ? 'Change in recorded reserve area (%)' : 'Change in recorded reserve area (ha)'"
+            }
+          }
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "bar",
+        "cornerRadiusEnd": 2
+      },
+      "encoding": {
+        "y": {
+          "field": "state",
+          "type": "nominal",
+          "sort": {
+            "field": "change_percent",
+            "op": "max",
+            "order": "descending"
+          },
+          "title": null
+        },
+        "x": {
+          "field": "change",
+          "type": "quantitative",
+          "title": null,
+          "axis": {
+            "format": "~s",
+            "title": {
+              "expr": "changeMetric === 'Percent' ? 'Change in recorded reserve area (%)' : 'Change in recorded reserve area (ha)'"
+            },
+            "tickCount": 6,
+            "labelOverlap": true
+          }
+        },
+        "color": {
+          "field": "direction",
+          "type": "nominal",
+          "title": null,
+          "scale": {
+            "domain": [
+              "Increase",
+              "Decrease"
+            ],
+            "range": [
+              "#17664b",
+              "#b35132"
+            ]
+          }
+        },
+        "opacity": {
+          "condition": {
+            "test": "stateFocus === 'All states' || datum.state === stateFocus",
+            "value": 1
+          },
+          "value": 0.23
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "change_percent",
+            "type": "quantitative",
+            "title": "Change (%)",
+            "format": "+.2f"
+          },
+          {
+            "field": "change_area",
+            "type": "quantitative",
+            "title": "Change (ha)",
+            "format": "+,.0f"
+          },
+          {
+            "field": "area_2003",
+            "type": "quantitative",
+            "title": "2003 (ha)",
+            "format": ",.0f"
+          },
+          {
+            "field": "area_2021",
+            "type": "quantitative",
+            "title": "2021 (ha)",
+            "format": ",.0f"
+          }
+        ]
+      }
+    }
+  ]
+}

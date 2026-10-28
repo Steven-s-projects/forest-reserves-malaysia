@@ -1,0 +1,37 @@
+{
+  "viewports": [
+    {
+      "viewport": 1440,
+      "content": 1440,
+      "charts": 10,
+      "chartOverflow": []
+    },
+    {
+      "viewport": 768,
+      "content": 768,
+      "charts": 10,
+      "chartOverflow": []
+    },
+    {
+      "viewport": 390,
+      "content": 390,
+      "charts": 10,
+      "chartOverflow": []
+    }
+  ],
+  "interactions": [
+    "Keyboard skip link",
+    "State focus updates all five linked charts and exact-value table",
+    "CSV export: header and selected record",
+    "Reset restores 14 rows",
+    "Percentage/hectare toggle updates axis unit",
+    "District map state selection",
+    "Rainfall state selection",
+    "Map click updates state selector",
+    "Desktop-to-mobile live resize"
+  ],
+  "compileWarnings": [],
+  "consoleMessages": [],
+  "pageErrors": [],
+  "status": "passed"
+}

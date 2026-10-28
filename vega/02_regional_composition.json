@@ -1,0 +1,239 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 300,
+  "data": {
+    "url": "data/forest_reserve_state.csv"
+  },
+  "config": {
+    "background": "transparent",
+    "view": {
+      "stroke": null
+    },
+    "font": "Arial",
+    "axis": {
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "titleFontWeight": 500,
+      "labelColor": "#53645b",
+      "titleColor": "#20372e",
+      "gridColor": "#e7ece6",
+      "domain": false,
+      "tickColor": "#cdd7cf",
+      "labelPadding": 7,
+      "titlePadding": 12
+    },
+    "legend": {
+      "labelFontSize": 11,
+      "titleFontSize": 11,
+      "orient": "bottom",
+      "labelColor": "#53645b",
+      "titleColor": "#20372e",
+      "symbolStrokeWidth": 1
+    }
+  },
+  "transform": [
+    {
+      "filter": "datum.year !== 2010 && datum.year !== 2011"
+    },
+    {
+      "calculate": "datum.state === 'Sarawak' || datum.state === 'Sabah' ? datum.state : 'Peninsular states'",
+      "as": "group"
+    },
+    {
+      "aggregate": [
+        {
+          "op": "sum",
+          "field": "area_million_ha",
+          "as": "area"
+        }
+      ],
+      "groupby": [
+        "year",
+        "group"
+      ]
+    }
+  ],
+  "layer": [
+    {
+      "transform": [
+        {
+          "filter": "datum.year < 2010"
+        }
+      ],
+      "mark": {
+        "type": "area",
+        "opacity": 0.9,
+        "line": {
+          "color": "white",
+          "strokeWidth": 0.8
+        }
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "quantitative",
+          "title": null,
+          "scale": {
+            "domain": [
+              2003,
+              2021
+            ],
+            "zero": false
+          },
+          "axis": {
+            "values": [
+              2003,
+              2009,
+              2012,
+              2017,
+              2021
+            ],
+            "format": "d"
+          }
+        },
+        "y": {
+          "field": "area",
+          "type": "quantitative",
+          "stack": "zero",
+          "title": "Recorded reserve area (million ha)",
+          "scale": {
+            "domain": [
+              0,
+              14
+            ]
+          }
+        },
+        "color": {
+          "field": "group",
+          "type": "nominal",
+          "title": null,
+          "scale": {
+            "domain": [
+              "Sarawak",
+              "Sabah",
+              "Peninsular states"
+            ],
+            "range": [
+              "#17664b",
+              "#67a47d",
+              "#c3d6b4"
+            ]
+          }
+        },
+        "order": {
+          "field": "group",
+          "sort": "ascending"
+        },
+        "tooltip": [
+          {
+            "field": "year",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          {
+            "field": "group",
+            "type": "nominal",
+            "title": "Region"
+          },
+          {
+            "field": "area",
+            "type": "quantitative",
+            "title": "Reserve area (million ha)",
+            "format": ".3f"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.year > 2011"
+        }
+      ],
+      "mark": {
+        "type": "area",
+        "opacity": 0.9,
+        "line": {
+          "color": "white",
+          "strokeWidth": 0.8
+        }
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "quantitative",
+          "title": null,
+          "scale": {
+            "domain": [
+              2003,
+              2021
+            ],
+            "zero": false
+          },
+          "axis": {
+            "values": [
+              2003,
+              2009,
+              2012,
+              2017,
+              2021
+            ],
+            "format": "d"
+          }
+        },
+        "y": {
+          "field": "area",
+          "type": "quantitative",
+          "stack": "zero",
+          "title": "Recorded reserve area (million ha)",
+          "scale": {
+            "domain": [
+              0,
+              14
+            ]
+          }
+        },
+        "color": {
+          "field": "group",
+          "type": "nominal",
+          "title": null,
+          "scale": {
+            "domain": [
+              "Sarawak",
+              "Sabah",
+              "Peninsular states"
+            ],
+            "range": [
+              "#17664b",
+              "#67a47d",
+              "#c3d6b4"
+            ]
+          }
+        },
+        "order": {
+          "field": "group",
+          "sort": "ascending"
+        },
+        "tooltip": [
+          {
+            "field": "year",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          {
+            "field": "group",
+            "type": "nominal",
+            "title": "Region"
+          },
+          {
+            "field": "area",
+            "type": "quantitative",
+            "title": "Reserve area (million ha)",
+            "format": ".3f"
+          }
+        ]
+      }
+    }
+  ]
+}

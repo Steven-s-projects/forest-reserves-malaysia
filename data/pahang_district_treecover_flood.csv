@@ -1,0 +1,7 @@
+state,district,district_code,flood_years,flood_frequency_percent,district_area_ha,tree_cover_area_30pct_ha,tree_cover_share_30pct,mean_tree_cover_percent,pixels_inside
+Pahang,Kuantan,106001,3,37.5,305293,254392,83.33,73.71,3977154
+Pahang,Temerloh,106002,7,87.5,228698,204862,89.58,79.98,2978455
+Pahang,Rompin,106003,4,50,521271,477612,91.62,84.57,6784104
+Pahang,Pekan,107001,7,87.5,371850,332404,89.39,81.42,4841525
+Pahang,Jerantut,107002,7,87.5,725738,701347,96.64,91.17,9459053
+Pahang,Maran,107003,7,87.5,199079,169941,85.36,74.44,2592768

@@ -1,0 +1,100 @@
+[
+  {
+    "state": "Sarawak",
+    "area_2003": 4836800.0,
+    "area_2021": 3964880.0,
+    "change_area": -871920.0,
+    "change_percent": -18.02679457492557
+  },
+  {
+    "state": "Johor",
+    "area_2003": 356922.0,
+    "area_2021": 334502.0,
+    "change_area": -22420.0,
+    "change_percent": -6.281484469996245
+  },
+  {
+    "state": "Negeri Sembilan",
+    "area_2003": 165639.0,
+    "area_2021": 155143.0,
+    "change_area": -10496.0,
+    "change_percent": -6.33667191905288
+  },
+  {
+    "state": "Kedah",
+    "area_2003": 344530.0,
+    "area_2021": 341976.0,
+    "change_area": -2554.0,
+    "change_percent": -0.7412997416770672
+  },
+  {
+    "state": "Melaka",
+    "area_2003": 5468.0,
+    "area_2021": 5199.0,
+    "change_area": -269.0,
+    "change_percent": -4.91953182150695
+  },
+  {
+    "state": "Perlis",
+    "area_2003": 10718.0,
+    "area_2021": 10629.0,
+    "change_area": -89.0,
+    "change_percent": -0.8303788020153015
+  },
+  {
+    "state": "W.P. Kuala Lumpur",
+    "area_2003": 61.0,
+    "area_2021": 68.0,
+    "change_area": 7.0,
+    "change_percent": 11.475409836065573
+  },
+  {
+    "state": "Kelantan",
+    "area_2003": 629687.0,
+    "area_2021": 629881.0,
+    "change_area": 194.0,
+    "change_percent": 0.0308089574661697
+  },
+  {
+    "state": "Pulau Pinang",
+    "area_2003": 5139.0,
+    "area_2021": 5387.0,
+    "change_area": 248.0,
+    "change_percent": 4.825841603424791
+  },
+  {
+    "state": "Terengganu",
+    "area_2003": 535929.0,
+    "area_2021": 540309.0,
+    "change_area": 4380.0,
+    "change_percent": 0.8172724372071674
+  },
+  {
+    "state": "Sabah",
+    "area_2003": 3563186.0,
+    "area_2021": 3574468.0,
+    "change_area": 11282.0,
+    "change_percent": 0.3166267492070299
+  },
+  {
+    "state": "Selangor",
+    "area_2003": 233781.0,
+    "area_2021": 250208.0,
+    "change_area": 16427.0,
+    "change_percent": 7.026661704757872
+  },
+  {
+    "state": "Pahang",
+    "area_2003": 1524132.0,
+    "area_2021": 1588298.0,
+    "change_area": 64166.0,
+    "change_percent": 4.210002808155724
+  },
+  {
+    "state": "Perak",
+    "area_2003": 884205.0,
+    "area_2021": 986848.0,
+    "change_area": 102643.0,
+    "change_percent": 11.608507076978755
+  }
+]

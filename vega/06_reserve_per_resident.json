@@ -1,0 +1,150 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 380,
+  "data": {
+    "url": "data/derived/population_comparison.json"
+  },
+  "config": {
+    "background": "transparent",
+    "view": {
+      "stroke": null
+    },
+    "font": "Arial",
+    "axis": {
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "titleFontWeight": 500,
+      "labelColor": "#53645b",
+      "titleColor": "#20372e",
+      "gridColor": "#e7ece6",
+      "domain": false,
+      "tickColor": "#cdd7cf",
+      "labelPadding": 7,
+      "titlePadding": 12
+    },
+    "legend": {
+      "labelFontSize": 11,
+      "titleFontSize": 11,
+      "orient": "bottom",
+      "labelColor": "#53645b",
+      "titleColor": "#20372e",
+      "symbolStrokeWidth": 1
+    }
+  },
+  "params": [
+    {
+      "name": "stateFocus",
+      "value": "All states"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "color": "#c6d9c6",
+        "size": 3
+      },
+      "encoding": {
+        "y": {
+          "field": "state",
+          "type": "nominal",
+          "sort": {
+            "field": "per1000",
+            "op": "max",
+            "order": "descending"
+          },
+          "title": null
+        },
+        "x": {
+          "field": "per1000",
+          "type": "quantitative",
+          "title": "Reserve hectares per 1,000 residents",
+          "scale": {
+            "zero": true
+          }
+        },
+        "opacity": {
+          "condition": {
+            "test": "stateFocus === 'All states' || datum.state === stateFocus",
+            "value": 1
+          },
+          "value": 0.22
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "per1000",
+            "type": "quantitative",
+            "title": "ha / 1,000 residents",
+            "format": ".2f"
+          },
+          {
+            "field": "pop",
+            "type": "quantitative",
+            "title": "Population",
+            "format": ",.0f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 65,
+        "color": "#17664b"
+      },
+      "encoding": {
+        "y": {
+          "field": "state",
+          "type": "nominal",
+          "sort": {
+            "field": "per1000",
+            "op": "max",
+            "order": "descending"
+          },
+          "title": null
+        },
+        "x": {
+          "field": "per1000",
+          "type": "quantitative",
+          "title": "Reserve hectares per 1,000 residents",
+          "scale": {
+            "zero": true
+          }
+        },
+        "opacity": {
+          "condition": {
+            "test": "stateFocus === 'All states' || datum.state === stateFocus",
+            "value": 1
+          },
+          "value": 0.22
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "per1000",
+            "type": "quantitative",
+            "title": "ha / 1,000 residents",
+            "format": ".2f"
+          },
+          {
+            "field": "pop",
+            "type": "quantitative",
+            "title": "Population",
+            "format": ",.0f"
+          }
+        ]
+      }
+    }
+  ]
+}

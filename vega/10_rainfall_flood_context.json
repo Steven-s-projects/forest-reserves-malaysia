@@ -1,0 +1,164 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 290,
+  "data": {
+    "url": "data/flood_rainfall_forest_2003_2010.csv"
+  },
+  "params": [
+    {
+      "name": "rainState",
+      "value": "Pahang",
+      "bind": {
+        "input": "select",
+        "options": [
+          "Johor",
+          "Kedah",
+          "Kelantan",
+          "Melaka",
+          "Negeri Sembilan",
+          "Pahang",
+          "Perak",
+          "Perlis",
+          "Sabah",
+          "Sarawak",
+          "Terengganu"
+        ],
+        "name": "Compare years within: "
+      }
+    }
+  ],
+  "transform": [
+    {
+      "filter": "datum.state === rainState"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 95,
+        "color": "#246ba0",
+        "stroke": "white"
+      },
+      "encoding": {
+        "x": {
+          "field": "annual_rainfall_mean",
+          "type": "quantitative",
+          "title": "Supplied mean annual rainfall (mm)",
+          "scale": {
+            "zero": false,
+            "nice": true
+          },
+          "axis": {
+            "tickCount": 6,
+            "labelOverlap": true,
+            "format": ",.0f"
+          }
+        },
+        "y": {
+          "field": "flood_rate_percent",
+          "type": "quantitative",
+          "title": "District records flagged for flooding (%)",
+          "scale": {
+            "domain": [
+              0,
+              100
+            ]
+          }
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "YEAR",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          {
+            "field": "annual_rainfall_mean",
+            "type": "quantitative",
+            "format": ".1f",
+            "title": "Mean rainfall (mm)"
+          },
+          {
+            "field": "flood_rate_percent",
+            "type": "quantitative",
+            "format": ".1f",
+            "title": "District records flooded (%)"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "dy": -12,
+        "color": "#20372e",
+        "fontSize": 10
+      },
+      "encoding": {
+        "x": {
+          "field": "annual_rainfall_mean",
+          "type": "quantitative",
+          "title": "Supplied mean annual rainfall (mm)",
+          "scale": {
+            "zero": false,
+            "nice": true
+          },
+          "axis": {
+            "tickCount": 6,
+            "labelOverlap": true,
+            "format": ",.0f"
+          }
+        },
+        "y": {
+          "field": "flood_rate_percent",
+          "type": "quantitative",
+          "title": "District records flagged for flooding (%)",
+          "scale": {
+            "domain": [
+              0,
+              100
+            ]
+          }
+        },
+        "text": {
+          "field": "YEAR",
+          "type": "ordinal"
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": "transparent",
+    "view": {
+      "stroke": null
+    },
+    "font": "Arial",
+    "axis": {
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "titleFontWeight": 500,
+      "labelColor": "#53645b",
+      "titleColor": "#20372e",
+      "gridColor": "#e7ece6",
+      "domain": false,
+      "tickColor": "#cdd7cf",
+      "labelPadding": 7,
+      "titlePadding": 12
+    },
+    "legend": {
+      "labelFontSize": 11,
+      "titleFontSize": 11,
+      "orient": "bottom",
+      "labelColor": "#53645b",
+      "titleColor": "#20372e",
+      "symbolStrokeWidth": 1
+    }
+  }
+}

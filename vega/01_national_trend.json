@@ -1,0 +1,276 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 300,
+  "data": {
+    "url": "data/forest_reserve.csv"
+  },
+  "config": {
+    "background": "transparent",
+    "view": {
+      "stroke": null
+    },
+    "font": "Arial",
+    "axis": {
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "titleFontWeight": 500,
+      "labelColor": "#53645b",
+      "titleColor": "#20372e",
+      "gridColor": "#e7ece6",
+      "domain": false,
+      "tickColor": "#cdd7cf",
+      "labelPadding": 7,
+      "titlePadding": 12
+    },
+    "legend": {
+      "labelFontSize": 11,
+      "titleFontSize": 11,
+      "orient": "bottom",
+      "labelColor": "#53645b",
+      "titleColor": "#20372e",
+      "symbolStrokeWidth": 1
+    }
+  },
+  "transform": [
+    {
+      "calculate": "datum.year < 2010 ? '2003-2009' : '2012-2021'",
+      "as": "segment"
+    }
+  ],
+  "layer": [
+    {
+      "data": {
+        "values": [
+          {
+            "start": 2009.5,
+            "end": 2011.5
+          }
+        ]
+      },
+      "mark": {
+        "type": "rect",
+        "color": "#e9eae4",
+        "opacity": 0.7
+      },
+      "encoding": {
+        "x": {
+          "field": "start",
+          "type": "quantitative"
+        },
+        "x2": {
+          "field": "end"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "line",
+        "color": "#17664b",
+        "strokeWidth": 3,
+        "point": {
+          "filled": true,
+          "size": 35,
+          "color": "#17664b"
+        }
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              2003,
+              2021
+            ],
+            "zero": false
+          },
+          "axis": {
+            "values": [
+              2003,
+              2006,
+              2009,
+              2012,
+              2015,
+              2017,
+              2019,
+              2021
+            ],
+            "format": "d",
+            "labelOverlap": true
+          },
+          "title": null
+        },
+        "y": {
+          "field": "area_million_ha",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              12.1,
+              13.35
+            ],
+            "zero": false
+          },
+          "title": "Recorded reserve area (million ha)"
+        },
+        "tooltip": [
+          {
+            "field": "year",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          {
+            "field": "area",
+            "type": "quantitative",
+            "title": "Reserve area (ha)",
+            "format": ",.0f"
+          }
+        ],
+        "detail": {
+          "field": "segment"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "year": 2017
+          }
+        ]
+      },
+      "mark": {
+        "type": "rule",
+        "stroke": "#b35132",
+        "strokeDash": [
+          4,
+          4
+        ]
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "year": 2010.5,
+            "y": 13.27,
+            "label": "No data"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 11,
+        "color": "#68746b"
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "y",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "year": 2017,
+            "y": 13.27,
+            "label": "Definition changes"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 6,
+        "fontSize": 11,
+        "color": "#b35132"
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "y",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.year == 2009 || datum.year == 2019 || datum.year == 2021"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "dy": -13,
+        "fontWeight": 600,
+        "color": "#17664b"
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              2003,
+              2021
+            ],
+            "zero": false
+          },
+          "axis": {
+            "values": [
+              2003,
+              2006,
+              2009,
+              2012,
+              2015,
+              2017,
+              2019,
+              2021
+            ],
+            "format": "d",
+            "labelOverlap": true
+          },
+          "title": null
+        },
+        "y": {
+          "field": "area_million_ha",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              12.1,
+              13.35
+            ],
+            "zero": false
+          },
+          "title": "Recorded reserve area (million ha)"
+        },
+        "text": {
+          "field": "area_million_ha",
+          "format": ".2f",
+          "type": "quantitative"
+        }
+      }
+    }
+  ]
+}

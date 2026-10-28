@@ -1,0 +1,167 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 390,
+  "data": {
+    "url": "data/malaysia_states.geojson",
+    "format": {
+      "type": "json",
+      "property": "features"
+    }
+  },
+  "config": {
+    "background": "transparent",
+    "view": {
+      "stroke": null
+    },
+    "font": "Arial",
+    "axis": {
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "titleFontWeight": 500,
+      "labelColor": "#53645b",
+      "titleColor": "#20372e",
+      "gridColor": "#e7ece6",
+      "domain": false,
+      "tickColor": "#cdd7cf",
+      "labelPadding": 7,
+      "titlePadding": 12
+    },
+    "legend": {
+      "labelFontSize": 11,
+      "titleFontSize": 11,
+      "orient": "bottom",
+      "labelColor": "#53645b",
+      "titleColor": "#20372e",
+      "symbolStrokeWidth": 1
+    }
+  },
+  "projection": {
+    "type": "mercator"
+  },
+  "params": [
+    {
+      "name": "floodState",
+      "value": "All five states",
+      "bind": {
+        "input": "select",
+        "options": [
+          "All five states",
+          "Johor",
+          "Kedah",
+          "Negeri Sembilan",
+          "Pahang",
+          "Terengganu"
+        ],
+        "name": "District focus: "
+      }
+    }
+  ],
+  "layer": [
+    {
+      "transform": [
+        {
+          "filter": "datum.properties.name !== 'Sabah' && datum.properties.name !== 'Sarawak' && datum.properties.name !== 'WP Labuan'"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "fill": "#e9ede6",
+        "stroke": "#fff",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "tooltip": [
+          {
+            "field": "properties.name",
+            "type": "nominal",
+            "title": "State"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "data/district_flood_frequency_map.csv"
+      },
+      "mark": {
+        "type": "circle",
+        "color": "#246ba0",
+        "opacity": 0.7,
+        "stroke": "white",
+        "strokeWidth": 1.2
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "size": {
+          "field": "flood_years",
+          "type": "quantitative",
+          "title": "Years with recorded flooding",
+          "scale": {
+            "domain": [
+              0,
+              8
+            ],
+            "range": [
+              0,
+              520
+            ],
+            "type": "linear"
+          },
+          "legend": {
+            "values": [
+              1,
+              4,
+              7
+            ],
+            "orient": "bottom"
+          }
+        },
+        "opacity": {
+          "condition": {
+            "test": "floodState === 'All five states' || datum.state === floodState",
+            "value": 0.8
+          },
+          "value": 0.08
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "district",
+            "type": "nominal",
+            "title": "District"
+          },
+          {
+            "field": "flood_years",
+            "type": "quantitative",
+            "title": "Flood years (out of 8)",
+            "format": ".0f"
+          },
+          {
+            "field": "flood_frequency_percent",
+            "type": "quantitative",
+            "title": "Frequency (%)",
+            "format": ".1f"
+          },
+          {
+            "field": "coordinate_points",
+            "type": "quantitative",
+            "title": "Town coordinates averaged",
+            "format": ".0f"
+          }
+        ]
+      }
+    }
+  ]
+}

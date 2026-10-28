@@ -1,0 +1,100 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 220,
+  "data": {
+    "url": "data/derived/change_contribution.json"
+  },
+  "config": {
+    "background": "transparent",
+    "view": {
+      "stroke": null
+    },
+    "font": "Arial",
+    "axis": {
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "titleFontWeight": 500,
+      "labelColor": "#53645b",
+      "titleColor": "#20372e",
+      "gridColor": "#e7ece6",
+      "domain": false,
+      "tickColor": "#cdd7cf",
+      "labelPadding": 7,
+      "titlePadding": 12
+    },
+    "legend": {
+      "labelFontSize": 11,
+      "titleFontSize": 11,
+      "orient": "bottom",
+      "labelColor": "#53645b",
+      "titleColor": "#20372e",
+      "symbolStrokeWidth": 1
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "color": "#9eaaa0"
+      },
+      "encoding": {
+        "x": {
+          "datum": 0
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "bar",
+        "cornerRadiusEnd": 2
+      },
+      "encoding": {
+        "y": {
+          "field": "group",
+          "type": "nominal",
+          "sort": [
+            "Sarawak",
+            "Other 13 jurisdictions",
+            "National net change"
+          ],
+          "title": null
+        },
+        "x": {
+          "field": "change",
+          "type": "quantitative",
+          "title": "Recorded endpoint difference (ha)",
+          "axis": {
+            "format": "~s"
+          }
+        },
+        "color": {
+          "condition": [
+            {
+              "test": "datum.group === 'National net change'",
+              "value": "#20372e"
+            },
+            {
+              "test": "datum.change < 0",
+              "value": "#b35132"
+            }
+          ],
+          "value": "#17664b"
+        },
+        "tooltip": [
+          {
+            "field": "group",
+            "type": "nominal",
+            "title": "Component"
+          },
+          {
+            "field": "change",
+            "type": "quantitative",
+            "title": "Change (ha)",
+            "format": "+,.0f"
+          }
+        ]
+      }
+    }
+  ]
+}

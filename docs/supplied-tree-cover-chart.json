@@ -1,0 +1,231 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 290,
+  "data": {
+    "url": "data/pahang_district_treecover_flood.csv"
+  },
+  "config": {
+    "background": "transparent",
+    "view": {
+      "stroke": null
+    },
+    "font": "Arial",
+    "axis": {
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "titleFontWeight": 500,
+      "labelColor": "#53645b",
+      "titleColor": "#20372e",
+      "gridColor": "#e7ece6",
+      "domain": false,
+      "tickColor": "#cdd7cf",
+      "labelPadding": 7,
+      "titlePadding": 12
+    },
+    "legend": {
+      "labelFontSize": 11,
+      "titleFontSize": 11,
+      "orient": "bottom",
+      "labelColor": "#53645b",
+      "titleColor": "#20372e",
+      "symbolStrokeWidth": 1
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 110,
+        "color": "#246ba0",
+        "stroke": "white"
+      },
+      "encoding": {
+        "x": {
+          "field": "tree_cover_share_30pct",
+          "type": "quantitative",
+          "title": "Estimated district tree-cover share, 2000 (%)",
+          "scale": {
+            "domain": [
+              80,
+              100
+            ],
+            "zero": false
+          }
+        },
+        "y": {
+          "field": "flood_years",
+          "type": "quantitative",
+          "title": "Years with flood records, 2003-2010",
+          "scale": {
+            "domain": [
+              0,
+              8
+            ]
+          },
+          "axis": {
+            "tickMinStep": 1
+          }
+        },
+        "tooltip": [
+          {
+            "field": "district",
+            "type": "nominal",
+            "title": "District"
+          },
+          {
+            "field": "tree_cover_share_30pct",
+            "type": "quantitative",
+            "title": "Tree-cover share (%)",
+            "format": ".2f"
+          },
+          {
+            "field": "flood_years",
+            "type": "quantitative",
+            "title": "Flood years",
+            "format": ".0f"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.district !== 'Pekan' && datum.district !== 'Temerloh'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "dx": 0,
+        "dy": -14,
+        "align": "center",
+        "fontSize": 10,
+        "color": "#20372e"
+      },
+      "encoding": {
+        "x": {
+          "field": "tree_cover_share_30pct",
+          "type": "quantitative",
+          "title": "Estimated district tree-cover share, 2000 (%)",
+          "scale": {
+            "domain": [
+              80,
+              100
+            ],
+            "zero": false
+          }
+        },
+        "y": {
+          "field": "flood_years",
+          "type": "quantitative",
+          "title": "Years with flood records, 2003-2010",
+          "scale": {
+            "domain": [
+              0,
+              8
+            ]
+          },
+          "axis": {
+            "tickMinStep": 1
+          }
+        },
+        "text": {
+          "field": "district"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.district === 'Pekan'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "dx": -9,
+        "dy": -14,
+        "align": "right",
+        "fontSize": 10,
+        "color": "#20372e"
+      },
+      "encoding": {
+        "x": {
+          "field": "tree_cover_share_30pct",
+          "type": "quantitative",
+          "title": "Estimated district tree-cover share, 2000 (%)",
+          "scale": {
+            "domain": [
+              80,
+              100
+            ],
+            "zero": false
+          }
+        },
+        "y": {
+          "field": "flood_years",
+          "type": "quantitative",
+          "title": "Years with flood records, 2003-2010",
+          "scale": {
+            "domain": [
+              0,
+              8
+            ]
+          },
+          "axis": {
+            "tickMinStep": 1
+          }
+        },
+        "text": {
+          "field": "district"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.district === 'Temerloh'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "dx": 9,
+        "dy": 14,
+        "align": "left",
+        "fontSize": 10,
+        "color": "#20372e"
+      },
+      "encoding": {
+        "x": {
+          "field": "tree_cover_share_30pct",
+          "type": "quantitative",
+          "title": "Estimated district tree-cover share, 2000 (%)",
+          "scale": {
+            "domain": [
+              80,
+              100
+            ],
+            "zero": false
+          }
+        },
+        "y": {
+          "field": "flood_years",
+          "type": "quantitative",
+          "title": "Years with flood records, 2003-2010",
+          "scale": {
+            "domain": [
+              0,
+              8
+            ]
+          },
+          "axis": {
+            "tickMinStep": 1
+          }
+        },
+        "text": {
+          "field": "district"
+        }
+      }
+    }
+  ]
+}

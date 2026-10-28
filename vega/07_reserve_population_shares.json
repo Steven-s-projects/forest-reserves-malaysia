@@ -1,0 +1,172 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 380,
+  "data": {
+    "url": "data/derived/population_comparison.json"
+  },
+  "config": {
+    "background": "transparent",
+    "view": {
+      "stroke": null
+    },
+    "font": "Arial",
+    "axis": {
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "titleFontWeight": 500,
+      "labelColor": "#53645b",
+      "titleColor": "#20372e",
+      "gridColor": "#e7ece6",
+      "domain": false,
+      "tickColor": "#cdd7cf",
+      "labelPadding": 7,
+      "titlePadding": 12
+    },
+    "legend": {
+      "labelFontSize": 11,
+      "titleFontSize": 11,
+      "orient": "bottom",
+      "labelColor": "#53645b",
+      "titleColor": "#20372e",
+      "symbolStrokeWidth": 1
+    }
+  },
+  "params": [
+    {
+      "name": "stateFocus",
+      "value": "All states"
+    }
+  ],
+  "transform": [
+    {
+      "fold": [
+        "forest_share",
+        "population_share"
+      ],
+      "as": [
+        "measure",
+        "share"
+      ]
+    },
+    {
+      "calculate": "datum.measure === 'forest_share' ? 'Reserve share' : 'Population share'",
+      "as": "label"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "color": "#cdd6cd",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "y": {
+          "field": "state",
+          "type": "nominal",
+          "sort": {
+            "field": "gap",
+            "order": "descending"
+          },
+          "title": null
+        },
+        "x": {
+          "field": "forest_share",
+          "type": "quantitative",
+          "title": "Share of national total (%)",
+          "scale": {
+            "zero": true
+          }
+        },
+        "x2": {
+          "field": "population_share"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "size": 85,
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "y": {
+          "field": "state",
+          "type": "nominal",
+          "sort": {
+            "field": "gap",
+            "order": "descending"
+          },
+          "title": null
+        },
+        "x": {
+          "field": "share",
+          "type": "quantitative",
+          "title": "Share of national total (%)"
+        },
+        "color": {
+          "field": "label",
+          "type": "nominal",
+          "title": null,
+          "scale": {
+            "domain": [
+              "Reserve share",
+              "Population share"
+            ],
+            "range": [
+              "#17664b",
+              "#8054a3"
+            ]
+          }
+        },
+        "shape": {
+          "field": "label",
+          "type": "nominal",
+          "title": null,
+          "scale": {
+            "domain": [
+              "Reserve share",
+              "Population share"
+            ],
+            "range": [
+              "circle",
+              "diamond"
+            ]
+          }
+        },
+        "opacity": {
+          "condition": {
+            "test": "stateFocus === 'All states' || datum.state === stateFocus",
+            "value": 1
+          },
+          "value": 0.23
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "label",
+            "type": "nominal",
+            "title": "Measure"
+          },
+          {
+            "field": "share",
+            "type": "quantitative",
+            "title": "Share (%)",
+            "format": ".2f"
+          },
+          {
+            "field": "gap",
+            "type": "quantitative",
+            "title": "Reserve minus population share (pp)",
+            "format": "+.2f"
+          }
+        ]
+      }
+    }
+  ]
+}

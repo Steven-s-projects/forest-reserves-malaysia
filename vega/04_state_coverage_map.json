@@ -1,0 +1,135 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 340,
+  "data": {
+    "url": "data/malaysia_states.geojson",
+    "format": {
+      "type": "json",
+      "property": "features"
+    }
+  },
+  "config": {
+    "background": "transparent",
+    "view": {
+      "stroke": null
+    },
+    "font": "Arial",
+    "axis": {
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "titleFontWeight": 500,
+      "labelColor": "#53645b",
+      "titleColor": "#20372e",
+      "gridColor": "#e7ece6",
+      "domain": false,
+      "tickColor": "#cdd7cf",
+      "labelPadding": 7,
+      "titlePadding": 12
+    },
+    "legend": {
+      "labelFontSize": 11,
+      "titleFontSize": 11,
+      "orient": "bottom",
+      "labelColor": "#53645b",
+      "titleColor": "#20372e",
+      "symbolStrokeWidth": 1
+    }
+  },
+  "params": [
+    {
+      "name": "stateFocus",
+      "value": "All states"
+    }
+  ],
+  "projection": {
+    "type": "mercator"
+  },
+  "transform": [
+    {
+      "calculate": "datum.properties.name === 'WP K Lumpur' ? 'W.P. Kuala Lumpur' : datum.properties.name === 'WP Labuan' ? 'W.P. Labuan' : datum.properties.name === 'WP Putrajaya' ? 'W.P. Putrajaya' : datum.properties.name",
+      "as": "state_join"
+    },
+    {
+      "lookup": "state_join",
+      "from": {
+        "data": {
+          "url": "data/forest_reserve_state_2021.csv"
+        },
+        "key": "state",
+        "fields": [
+          "area",
+          "state_area_ha"
+        ]
+      }
+    },
+    {
+      "calculate": "isValid(datum.area) && datum.state_area_ha > 0 ? datum.area / datum.state_area_ha * 100 : null",
+      "as": "reserve_pct"
+    },
+    {
+      "calculate": "isValid(datum.reserve_pct) ? 'Available' : 'Not in supplied reserve extract'",
+      "as": "availability"
+    }
+  ],
+  "mark": {
+    "type": "geoshape",
+    "stroke": "white",
+    "strokeWidth": 1
+  },
+  "encoding": {
+    "color": {
+      "condition": {
+        "test": "!isValid(datum.reserve_pct)",
+        "value": "#d9dfda"
+      },
+      "field": "reserve_pct",
+      "type": "quantitative",
+      "title": "Reserve / state land (%)",
+      "scale": {
+        "domain": [
+          0,
+          50
+        ],
+        "range": [
+          "#e3f0e6",
+          "#17664b"
+        ]
+      },
+      "legend": {
+        "gradientLength": 170
+      }
+    },
+    "opacity": {
+      "condition": {
+        "test": "stateFocus === 'All states' || datum.state_join === stateFocus",
+        "value": 1
+      },
+      "value": 0.25
+    },
+    "tooltip": [
+      {
+        "field": "state_join",
+        "type": "nominal",
+        "title": "State"
+      },
+      {
+        "field": "reserve_pct",
+        "type": "quantitative",
+        "title": "State land in reserves (%)",
+        "format": ".2f"
+      },
+      {
+        "field": "area",
+        "type": "quantitative",
+        "title": "Reserve area (ha)",
+        "format": ",.0f"
+      },
+      {
+        "field": "availability",
+        "type": "nominal",
+        "title": "Data coverage"
+      }
+    ]
+  }
+}
